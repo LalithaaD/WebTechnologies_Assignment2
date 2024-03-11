@@ -8,22 +8,22 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        getUser();
+        getOrders();
         break;
 
     case 'POST':
         $data = json_decode(file_get_contents("php://input"), true);
-        createUser($data);
+        createOrder($data);
         break;
 
     case 'PUT':
         $data = json_decode(file_get_contents("php://input"), true);
-        updateUser($data);
+        updateOrder($data);
         break;
 
     case 'DELETE':
         $data = json_decode(file_get_contents("php://input"), true);
-        deleteUser($data['id']);
+        deleteOrder($data['id']);
         break;
 
     default:
@@ -32,15 +32,14 @@ switch ($method) {
         break;
 }
 
-function getUser() {
+function getOrders() {
     global $db;
 
     try {
         echo json_encode(array(
-            'id' => 1,
-            'email' => 'example@example.com',
-            'username' => 'example_user'
-          
+            array('id' => 1, 'user_id' => 1, 'products' => 'Product1,Product2', 'created_at' => '2024-03-10 12:00:00'),
+            array('id' => 2, 'user_id' => 2, 'products' => 'Product3,Product4', 'created_at' => '2024-03-10 14:30:00')
+            
         ));
     } catch (Exception $e) {
         http_response_code(500); // Internal Server Error
@@ -48,17 +47,16 @@ function getUser() {
     }
 }
 
-function createUser($data) {
+function createOrder($data) {
     global $db;
 
     try {
-        // Validate data 
-        $email = $data['email'] ?? '';
-        $password = $data['password'] ?? '';
-        $username = $data['username'] ?? '';
+        // Validate data (you may want to add more validation)
+        $userID = $data['user_id'] ?? '';
+        $products = $data['products'] ?? '';
 
-        // SQL to insert a new user
-        $sql = "INSERT INTO user (Email, Password, Username) VALUES ('$email', '$password', '$username')";
+        // SQL to insert a new order
+        $sql = "INSERT INTO orders (User, Products) VALUES ('$userID', '$products')";
 
         // Execute the query
         $result = $db->query($sql);
@@ -66,10 +64,10 @@ function createUser($data) {
         // Check if the query was successful
         if ($result) {
             http_response_code(201); // Created
-            echo json_encode(array('message' => 'User created successfully.'));
+            echo json_encode(array('message' => 'Order created successfully.'));
         } else {
             http_response_code(500); // Internal Server Error
-            echo json_encode(array('message' => 'Error creating user: ' . $db->error));
+            echo json_encode(array('message' => 'Error creating order: ' . $db->error));
         }
     } catch (Exception $e) {
         http_response_code(500); // Internal Server Error
@@ -77,28 +75,29 @@ function createUser($data) {
     }
 }
 
-function updateUser($data) {
+function updateOrder($data) {
     global $db;
 
     try {
         // Validate data 
         $id = $data['id'] ?? 0;
-        $email = $data['email'] ?? '';
-        $password = $data['password'] ?? '';
-        $username = $data['username'] ?? '';
+        $userID = $data['user_id'] ?? '';
+        $products = $data['products'] ?? '';
 
-        // SQL to update a user
-        $sql = "UPDATE user SET Email='$email', Password='$password', Username='$username' WHERE id=$id";
+        // SQL to update an order
+        $sql = "UPDATE orders 
+                SET User='$userID', Products='$products'
+                WHERE id=$id";
 
         // Execute the query
         $result = $db->query($sql);
 
         // Check if the query was successful
         if ($result) {
-            echo json_encode(array('message' => 'User updated successfully.'));
+            echo json_encode(array('message' => 'Order updated successfully.'));
         } else {
             http_response_code(500); // Internal Server Error
-            echo json_encode(array('message' => 'Error updating user: ' . $db->error));
+            echo json_encode(array('message' => 'Error updating order: ' . $db->error));
         }
     } catch (Exception $e) {
         http_response_code(500); // Internal Server Error
@@ -106,22 +105,22 @@ function updateUser($data) {
     }
 }
 
-function deleteUser($id) {
+function deleteOrder($id) {
     global $db;
 
     try {
-        // SQL to delete a user
-        $sql = "DELETE FROM user WHERE id=$id";
+        // SQL to delete an order
+        $sql = "DELETE FROM orders WHERE id=$id";
 
         // Execute the query
         $result = $db->query($sql);
 
         // Check if the query was successful
         if ($result) {
-            echo json_encode(array('message' => 'User deleted successfully.'));
+            echo json_encode(array('message' => 'Order deleted successfully.'));
         } else {
             http_response_code(500); // Internal Server Error
-            echo json_encode(array('message' => 'Error deleting user: ' . $db->error));
+            echo json_encode(array('message' => 'Error deleting order: ' . $db->error));
         }
     } catch (Exception $e) {
         http_response_code(500); // Internal Server Error

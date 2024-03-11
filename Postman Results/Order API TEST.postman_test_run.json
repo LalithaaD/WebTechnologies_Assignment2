@@ -1,0 +1,146 @@
+{
+	"id": "3a2e8d50-2e5e-46fd-90b2-9fe175b810b9",
+	"name": "Order API TEST",
+	"timestamp": "2024-03-11T03:35:17.145Z",
+	"collection_id": "33511578-ceb7782f-bcc8-4729-bcb6-8aefdc86ae0a",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-03-11T03:35:16.448Z",
+	"totalFail": 4,
+	"results": [
+		{
+			"id": "fa09ecb8-12e9-42b2-8a7c-bad0d36ce71d",
+			"name": "GET Order API",
+			"url": "http://localhost/WT2/orders.php",
+			"time": 10,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Get All Orders": false
+			},
+			"testPassFailCounts": {
+				"Get All Orders": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Get All Orders": false
+				}
+			]
+		},
+		{
+			"id": "d4f29eda-135e-41da-8f40-3e72353d5221",
+			"name": "POST Order API",
+			"url": "http://localhost/WT2/orders.php",
+			"time": 3,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Create Order": false
+			},
+			"testPassFailCounts": {
+				"Create Order": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Create Order": false
+				}
+			]
+		},
+		{
+			"id": "a38bd7c2-671e-4445-8b17-6624b29dd80e",
+			"name": "PUT Order API",
+			"url": "http://localhost/WT2/orders.php",
+			"time": 3,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Update Order": false
+			},
+			"testPassFailCounts": {
+				"Update Order": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Update Order": false
+				}
+			]
+		},
+		{
+			"id": "a54bf772-8a42-4335-8dc9-63edda6cb1b0",
+			"name": "DELETE Order API",
+			"url": "http://localhost/WT2/orders.php",
+			"time": 3,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Delete Order": false
+			},
+			"testPassFailCounts": {
+				"Delete Order": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Delete Order": false
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 19,
+	"collection": {
+		"requests": [
+			{
+				"id": "fa09ecb8-12e9-42b2-8a7c-bad0d36ce71d",
+				"method": "GET"
+			},
+			{
+				"id": "d4f29eda-135e-41da-8f40-3e72353d5221",
+				"method": "POST"
+			},
+			{
+				"id": "a38bd7c2-671e-4445-8b17-6624b29dd80e",
+				"method": "PUT"
+			},
+			{
+				"id": "a54bf772-8a42-4335-8dc9-63edda6cb1b0",
+				"method": "DELETE"
+			}
+		]
+	}
+}

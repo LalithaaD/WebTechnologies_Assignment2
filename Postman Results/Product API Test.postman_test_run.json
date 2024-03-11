@@ -1,0 +1,122 @@
+{
+	"id": "b8cad400-36cb-4a59-8fb0-d0f7b662a9e8",
+	"name": "Product API Test",
+	"timestamp": "2024-03-11T03:36:19.196Z",
+	"collection_id": "33511578-7d0cae42-9ff5-4386-9a58-2cbe492aced3",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 3,
+	"delay": 0,
+	"persist": true,
+	"status": "error",
+	"startedAt": "2024-03-11T03:36:18.538Z",
+	"totalFail": 1,
+	"results": [
+		{
+			"id": "af4d2bb2-d3f5-42c7-9776-4dc544b775f2",
+			"name": "GET Product API",
+			"url": "http://localhost/WT2/product.php",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Update Product - Status Code 200": true,
+				"Get All Products - Status Code 200": true
+			},
+			"testPassFailCounts": {
+				"Update Product - Status Code 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Get All Products - Status Code 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Update Product - Status Code 200": true,
+					"Get All Products - Status Code 200": true
+				}
+			]
+		},
+		{
+			"id": "85560d27-8f48-4f65-aad8-8c25a21f59db",
+			"name": "POST Product API",
+			"url": "http://localhost/WT2/product.php",
+			"time": 13,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Create Product - Status Code 201": true,
+				"Create Product - Message Check": false
+			},
+			"testPassFailCounts": {
+				"Create Product - Status Code 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Create Product - Message Check": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Create Product - Status Code 201": true,
+					"Create Product - Message Check": false
+				}
+			]
+		},
+		{
+			"id": "b037aa07-d569-43a1-9385-1345b821a021",
+			"name": "PUT Product API",
+			"url": "http://localhost/WT2/product.php",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				6
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 30,
+	"collection": {
+		"requests": [
+			{
+				"id": "af4d2bb2-d3f5-42c7-9776-4dc544b775f2",
+				"method": "GET"
+			},
+			{
+				"id": "85560d27-8f48-4f65-aad8-8c25a21f59db",
+				"method": "POST"
+			},
+			{
+				"id": "b037aa07-d569-43a1-9385-1345b821a021",
+				"method": "PUT"
+			},
+			{
+				"id": "de7289a9-ca88-44f7-bac7-157caccd2b5f",
+				"method": "GET"
+			}
+		]
+	}
+}
