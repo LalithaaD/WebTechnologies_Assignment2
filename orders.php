@@ -8,22 +8,22 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        getCarts();
+        getOrders();
         break;
 
     case 'POST':
         $data = json_decode(file_get_contents("php://input"), true);
-        createCart($data);
+        createOrder($data);
         break;
 
     case 'PUT':
         $data = json_decode(file_get_contents("php://input"), true);
-        updateCart($data);
+        updateOrder($data);
         break;
 
     case 'DELETE':
         $data = json_decode(file_get_contents("php://input"), true);
-        deleteCart($data['id']);
+        deleteOrder($data['id']);
         break;
 
     default:
@@ -32,38 +32,44 @@ switch ($method) {
         break;
 }
 
-function getCarts() {
+function getOrders() {
     global $db;
 
     try {
-        echo json_encode(array(
-            array('id' => 1, 'user' => 1, 'products' => 'Product1:2,Product2:1', 'created_at' => '2024-03-10 12:00:00'),
-            array('id' => 2, 'user' => 2, 'products' => 'Product3:3,Product4:2', 'created_at' => '2024-03-10 14:30:00')
-        ));
+        $sql = "SELECT id, user_id, products FROM `orders`";
+        $result = $db->query($sql);
+
+        if ($result) {
+            $orderData = $result->fetch_all(MYSQLI_ASSOC);
+            header('Content-Type: application/json');
+            echo json_encode($orderData);
+        } else {
+            http_response_code(500);
+            echo json_encode(array('message' => 'Error fetching orders: ' . $db->error));
+        }
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(array('message' => 'Error: ' . $e->getMessage()));
     }
 }
 
-function createCart($data) {
+function createOrder($data) {
     global $db;
 
     try {
-        $userID = $data['user'] ?? '';
+        $userID = $data['user_id'] ?? '';
         $products = $data['products'] ?? '';
-        $quantities = $data['quantities'] ?? '';
 
-        $sql = "INSERT INTO cart (User, Products, Quantities) VALUES ('$userID', '$products', '$quantities')";
+        $sql = "INSERT INTO `orders` (user_id, products) VALUES ('$userID', '$products')";
 
         $result = $db->query($sql);
 
         if ($result) {
             http_response_code(201);
-            echo json_encode(array('message' => 'Cart created successfully.'));
+            echo json_encode(array('message' => 'Order created successfully.'));
         } else {
             http_response_code(500);
-            echo json_encode(array('message' => 'Error creating cart: ' . $db->error));
+            echo json_encode(array('message' => 'Error creating order: ' . $db->error));
         }
     } catch (Exception $e) {
         http_response_code(500);
@@ -71,54 +77,51 @@ function createCart($data) {
     }
 }
 
-function updateCart($data) {
+function updateOrder($data) {
     global $db;
 
     try {
         $id = $data['id'] ?? 0;
+        $userID = $data['user_id'] ?? '';
         $products = $data['products'] ?? '';
-        $quantities = $data['quantities'] ?? '';
 
-        $sql = "UPDATE cart SET Products='$products', Quantities='$quantities' WHERE id=$id";
+        $sql = "UPDATE `orders`
+                SET user_id='$userID', products='$products'
+                WHERE id='$id'";
 
-        $debugOutput = array(
-            'debug' => 'Start of updateCart function',
-            'id' => $id,
-            'products' => $products,
-            'quantities' => $quantities
-        );
-
-        $debugOutput['sql'] = $sql;
+        error_log("SQL Query: $sql");
 
         $result = $db->query($sql);
 
         if ($result) {
-            http_response_code(200);
-            echo json_encode(array_merge($debugOutput, array('message' => 'Cart updated successfully')));
+            echo json_encode(array('message' => 'Order updated successfully.'));
         } else {
+            error_log("Database Error: " . $db->error);
+
             http_response_code(500);
-            echo json_encode(array_merge($debugOutput, array('message' => 'Error updating cart: ' . $db->error)));
+            echo json_encode(array('message' => 'Error updating order.'));
         }
     } catch (Exception $e) {
+        error_log("Exception: " . $e->getMessage());
+
         http_response_code(500);
-        echo json_encode(array('message' => 'Error: ' . $e->getMessage()));
+        echo json_encode(array('message' => 'Error updating order.'));
     }
 }
 
-function deleteCart($id) {
+function deleteOrder($id) {
     global $db;
 
     try {
-        $sql = "DELETE FROM cart WHERE id=$id";
+        $sql = "DELETE FROM `orders` WHERE id='$id'";
 
         $result = $db->query($sql);
 
         if ($result) {
-            http_response_code(200);
-            echo json_encode(array('message' => 'Cart deleted successfully.'));
+            echo json_encode(array('message' => 'Order deleted successfully.'));
         } else {
             http_response_code(500);
-            echo json_encode(array('message' => 'Error deleting cart: ' . $db->error));
+            echo json_encode(array('message' => 'Error deleting order: ' . $db->error));
         }
     } catch (Exception $e) {
         http_response_code(500);

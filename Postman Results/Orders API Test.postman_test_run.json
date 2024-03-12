@@ -1,41 +1,41 @@
 {
-	"id": "3a2e8d50-2e5e-46fd-90b2-9fe175b810b9",
-	"name": "Order API TEST",
-	"timestamp": "2024-03-11T03:35:17.145Z",
+	"id": "c104734e-3370-4ac5-ae07-ba9b6fd2a93b",
+	"name": "Orders API Test",
+	"timestamp": "2024-03-12T20:07:47.790Z",
 	"collection_id": "33511578-ceb7782f-bcc8-4729-bcb6-8aefdc86ae0a",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 0,
+	"totalPass": 4,
 	"delay": 0,
 	"persist": true,
 	"status": "finished",
-	"startedAt": "2024-03-11T03:35:16.448Z",
-	"totalFail": 4,
+	"startedAt": "2024-03-12T20:07:46.747Z",
+	"totalFail": 0,
 	"results": [
 		{
 			"id": "fa09ecb8-12e9-42b2-8a7c-bad0d36ce71d",
 			"name": "GET Order API",
 			"url": "http://localhost/WT2/orders.php",
-			"time": 10,
+			"time": 27,
 			"responseCode": {
-				"code": 404,
-				"name": "Not Found"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {
-				"Get All Orders": false
+				"Get All Orders": true
 			},
 			"testPassFailCounts": {
 				"Get All Orders": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				}
 			},
 			"times": [
-				10
+				27
 			],
 			"allTests": [
 				{
-					"Get All Orders": false
+					"Get All Orders": true
 				}
 			]
 		},
@@ -43,26 +43,26 @@
 			"id": "d4f29eda-135e-41da-8f40-3e72353d5221",
 			"name": "POST Order API",
 			"url": "http://localhost/WT2/orders.php",
-			"time": 3,
+			"time": 23,
 			"responseCode": {
-				"code": 404,
-				"name": "Not Found"
+				"code": 201,
+				"name": "Created"
 			},
 			"tests": {
-				"Create Order": false
+				"Create Order": true
 			},
 			"testPassFailCounts": {
 				"Create Order": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				}
 			},
 			"times": [
-				3
+				23
 			],
 			"allTests": [
 				{
-					"Create Order": false
+					"Create Order": true
 				}
 			]
 		},
@@ -70,26 +70,26 @@
 			"id": "a38bd7c2-671e-4445-8b17-6624b29dd80e",
 			"name": "PUT Order API",
 			"url": "http://localhost/WT2/orders.php",
-			"time": 3,
+			"time": 5,
 			"responseCode": {
-				"code": 404,
-				"name": "Not Found"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {
-				"Update Order": false
+				"Update Order": true
 			},
 			"testPassFailCounts": {
 				"Update Order": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				}
 			},
 			"times": [
-				3
+				5
 			],
 			"allTests": [
 				{
-					"Update Order": false
+					"Update Order": true
 				}
 			]
 		},
@@ -97,32 +97,32 @@
 			"id": "a54bf772-8a42-4335-8dc9-63edda6cb1b0",
 			"name": "DELETE Order API",
 			"url": "http://localhost/WT2/orders.php",
-			"time": 3,
+			"time": 21,
 			"responseCode": {
-				"code": 404,
-				"name": "Not Found"
+				"code": 200,
+				"name": "OK"
 			},
 			"tests": {
-				"Delete Order": false
+				"Delete Order": true
 			},
 			"testPassFailCounts": {
 				"Delete Order": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				}
 			},
 			"times": [
-				3
+				21
 			],
 			"allTests": [
 				{
-					"Delete Order": false
+					"Delete Order": true
 				}
 			]
 		}
 	],
 	"count": 1,
-	"totalTime": 19,
+	"totalTime": 76,
 	"collection": {
 		"requests": [
 			{

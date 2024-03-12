@@ -1,16 +1,16 @@
 {
-	"id": "b8cad400-36cb-4a59-8fb0-d0f7b662a9e8",
+	"id": "fb15ad5c-1ba7-4405-9a26-c743114f3172",
 	"name": "Product API Test",
-	"timestamp": "2024-03-11T03:36:19.196Z",
+	"timestamp": "2024-03-12T20:07:30.805Z",
 	"collection_id": "33511578-7d0cae42-9ff5-4386-9a58-2cbe492aced3",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 3,
+	"totalPass": 7,
 	"delay": 0,
 	"persist": true,
-	"status": "error",
-	"startedAt": "2024-03-11T03:36:18.538Z",
-	"totalFail": 1,
+	"status": "finished",
+	"startedAt": "2024-03-12T20:07:30.109Z",
+	"totalFail": 0,
 	"results": [
 		{
 			"id": "af4d2bb2-d3f5-42c7-9776-4dc544b775f2",
@@ -49,14 +49,14 @@
 			"id": "85560d27-8f48-4f65-aad8-8c25a21f59db",
 			"name": "POST Product API",
 			"url": "http://localhost/WT2/product.php",
-			"time": 13,
+			"time": 39,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
 			},
 			"tests": {
 				"Create Product - Status Code 201": true,
-				"Create Product - Message Check": false
+				"Create Product - Message Check": true
 			},
 			"testPassFailCounts": {
 				"Create Product - Status Code 201": {
@@ -64,17 +64,17 @@
 					"fail": 0
 				},
 				"Create Product - Message Check": {
-					"pass": 0,
-					"fail": 1
+					"pass": 1,
+					"fail": 0
 				}
 			},
 			"times": [
-				13
+				39
 			],
 			"allTests": [
 				{
 					"Create Product - Status Code 201": true,
-					"Create Product - Message Check": false
+					"Create Product - Message Check": true
 				}
 			]
 		},
@@ -82,23 +82,65 @@
 			"id": "b037aa07-d569-43a1-9385-1345b821a021",
 			"name": "PUT Product API",
 			"url": "http://localhost/WT2/product.php",
+			"time": 16,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Update Product": true
+			},
+			"testPassFailCounts": {
+				"Update Product": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Update Product": true
+				}
+			]
+		},
+		{
+			"id": "de7289a9-ca88-44f7-bac7-157caccd2b5f",
+			"name": "DELETE Product API",
+			"url": "http://localhost/WT2/product.php",
 			"time": 6,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
 			},
-			"tests": {},
-			"testPassFailCounts": {},
+			"tests": {
+				"Delete Product - Status Code 200": true,
+				"Delete Product - Message Check": true
+			},
+			"testPassFailCounts": {
+				"Delete Product - Status Code 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Delete Product - Message Check": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
 			"times": [
 				6
 			],
 			"allTests": [
-				{}
+				{
+					"Delete Product - Status Code 200": true,
+					"Delete Product - Message Check": true
+				}
 			]
 		}
 	],
 	"count": 1,
-	"totalTime": 30,
+	"totalTime": 72,
 	"collection": {
 		"requests": [
 			{
@@ -115,7 +157,7 @@
 			},
 			{
 				"id": "de7289a9-ca88-44f7-bac7-157caccd2b5f",
-				"method": "GET"
+				"method": "DELETE"
 			}
 		]
 	}

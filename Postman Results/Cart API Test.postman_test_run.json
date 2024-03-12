@@ -1,0 +1,146 @@
+{
+	"id": "437c1d7d-8c05-4011-8cf7-6f0f29905be7",
+	"name": "Cart API Test",
+	"timestamp": "2024-03-12T20:08:12.709Z",
+	"collection_id": "33511578-c564cf4f-947c-4e12-a2b1-7926b7a93ea6",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 4,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-03-12T20:08:11.991Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "deed1c5f-4baf-4b3d-9c1d-94089a50619d",
+			"name": "GET Cart API",
+			"url": "http://localhost/WT2/cart.php",
+			"time": 22,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Read Carts": true
+			},
+			"testPassFailCounts": {
+				"Read Carts": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Read Carts": true
+				}
+			]
+		},
+		{
+			"id": "e3ab1f35-8403-430a-a984-8a75faadae1d",
+			"name": "POST Cart API",
+			"url": "http://localhost/WT2/cart.php",
+			"time": 7,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Create Cart Item": true
+			},
+			"testPassFailCounts": {
+				"Create Cart Item": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Create Cart Item": true
+				}
+			]
+		},
+		{
+			"id": "63a3fa4d-5d32-4394-8081-b917c9c7659c",
+			"name": "PUT Cart API",
+			"url": "http://localhost/WT2/cart.php",
+			"time": 5,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Update Cart": true
+			},
+			"testPassFailCounts": {
+				"Update Cart": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Update Cart": true
+				}
+			]
+		},
+		{
+			"id": "a10154ac-a6f8-4df0-b0e5-b0cd75a7936b",
+			"name": "DELETE Cart API",
+			"url": "http://localhost/WT2/cart.php",
+			"time": 8,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Delete Cart": true
+			},
+			"testPassFailCounts": {
+				"Delete Cart": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Delete Cart": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 42,
+	"collection": {
+		"requests": [
+			{
+				"id": "deed1c5f-4baf-4b3d-9c1d-94089a50619d",
+				"method": "GET"
+			},
+			{
+				"id": "e3ab1f35-8403-430a-a984-8a75faadae1d",
+				"method": "POST"
+			},
+			{
+				"id": "63a3fa4d-5d32-4394-8081-b917c9c7659c",
+				"method": "PUT"
+			},
+			{
+				"id": "a10154ac-a6f8-4df0-b0e5-b0cd75a7936b",
+				"method": "DELETE"
+			}
+		]
+	}
+}

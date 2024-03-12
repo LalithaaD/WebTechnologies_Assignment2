@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2024 at 03:25 AM
+-- Generation Time: Mar 12, 2024 at 08:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,32 @@ CREATE TABLE `cart` (
   `User` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`Products`, `Quantities`, `User`) VALUES
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 2, '1'),
+('Product1,Product2', 2, '1'),
+('Product1,Product2', 2, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 0, '1'),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, ''),
+('Product1,Product2', 2, '');
+
 -- --------------------------------------------------------
 
 --
@@ -47,15 +73,46 @@ CREATE TABLE `comments` (
   `Text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`Product`, `User`, `Rating`, `Image`, `Text`) VALUES
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!'),
+('1', '1', 5, '', 'This is a great product!');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `order` (
-  `Sale Recording` text NOT NULL
+CREATE TABLE `orders` (
+  `user_id` int(11) NOT NULL,
+  `products` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`user_id`, `products`, `id`) VALUES
+(1, 0, 0),
+(1, 0, 0),
+(1, 0, 0),
+(1, 0, 0),
+(1, 0, 0),
+(1, 0, 0),
+(1, 0, 0),
+(1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -64,11 +121,33 @@ CREATE TABLE `order` (
 --
 
 CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
   `Description` text NOT NULL,
   `Image` text NOT NULL,
   `Pricing` int(200) NOT NULL,
   `ShippingCost` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `Description`, `Image`, `Pricing`, `ShippingCost`) VALUES
+(0, 'New Product', 'new_product.jpg', 50, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, '', '', 0, 0),
+(0, '', '', 0, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0),
+(0, 'Updated Product', 'updated_product.jpg', 60, 0);
 
 -- --------------------------------------------------------
 
@@ -77,12 +156,44 @@ CREATE TABLE `product` (
 --
 
 CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
   `Email` varchar(30) NOT NULL,
   `Password` varchar(18) NOT NULL,
   `Username` varchar(20) NOT NULL,
   `Purchase History` varchar(50) NOT NULL,
   `Shipping Address` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `Email`, `Password`, `Username`, `Purchase History`, `Shipping Address`) VALUES
+(8, 'newuser2@example.com', 'password1234', 'NewUser2', '', ''),
+(16, 'newuser3@example.com', 'password1234', 'NewUser2', '', ''),
+(17, 'user4@example.com', 'password123', 'NewUser', '', ''),
+(18, 'user4@example.com', 'password123', 'NewUser', '', ''),
+(19, 'user4@example.com', 'password123', 'NewUser', '', '');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

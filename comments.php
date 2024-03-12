@@ -27,7 +27,7 @@ switch ($method) {
         break;
 
     default:
-        http_response_code(405); // Method Not Allowed
+        http_response_code(405); 
         echo json_encode(array('message' => 'Method not allowed.'));
         break;
 }
@@ -41,7 +41,7 @@ function getComments() {
             array('id' => 2, 'product_id' => 1, 'user_id' => 2, 'rating' => 4, 'text' => 'Nice quality!')
         ));
     } catch (Exception $e) {
-        http_response_code(500); // Internal Server Error
+        http_response_code(500);
         echo json_encode(array('message' => 'Error: ' . $e->getMessage()));
     }
 }
@@ -50,28 +50,24 @@ function createComment($data) {
     global $db;
 
     try {
-        // Validate data 
         $productID = $data['product_id'] ?? '';
         $userID = $data['user_id'] ?? '';
         $rating = $data['rating'] ?? '';
         $text = $data['text'] ?? '';
 
-        // SQL to insert a new comment
         $sql = "INSERT INTO comments (Product, User, Rating, Text) VALUES ('$productID', '$userID', '$rating', '$text')";
 
-        // Execute the query
         $result = $db->query($sql);
 
-        // Check if the query was successful
         if ($result) {
-            http_response_code(201); // Created
+            http_response_code(201); 
             echo json_encode(array('message' => 'Comment created successfully.'));
         } else {
-            http_response_code(500); // Internal Server Error
+            http_response_code(500); 
             echo json_encode(array('message' => 'Error creating comment: ' . $db->error));
         }
     } catch (Exception $e) {
-        http_response_code(500); // Internal Server Error
+        http_response_code(500); 
         echo json_encode(array('message' => 'Error: ' . $e->getMessage()));
     }
 }
@@ -80,31 +76,30 @@ function updateComment($data) {
     global $db;
 
     try {
-        // Validate data 
         $id = $data['id'] ?? 0;
-        $productID = $data['product_id'] ?? '';
-        $userID = $data['user_id'] ?? '';
-        $rating = $data['rating'] ?? '';
-        $text = $data['text'] ?? '';
+        $commentText = $data['comment_text'] ?? '';
 
-        // SQL to update a comment
-        $sql = "UPDATE comments 
-                SET Product='$productID', User='$userID', Rating='$rating', Text='$text'
-                WHERE id=$id";
+        $sql = "UPDATE `comments`
+                SET comment_text='$commentText'
+                WHERE id='$id'";
 
-        // Execute the query
+        error_log("SQL Query: $sql");
+
         $result = $db->query($sql);
 
-        // Check if the query was successful
         if ($result) {
             echo json_encode(array('message' => 'Comment updated successfully.'));
         } else {
-            http_response_code(500); // Internal Server Error
-            echo json_encode(array('message' => 'Error updating comment: ' . $db->error));
+            error_log("Database Error: " . $db->error);
+
+            http_response_code(500); 
+            echo json_encode(array('message' => 'Error updating comment.'));
         }
     } catch (Exception $e) {
-        http_response_code(500); // Internal Server Error
-        echo json_encode(array('message' => 'Error: ' . $e->getMessage()));
+        error_log("Exception: " . $e->getMessage());
+
+        http_response_code(500); 
+        echo json_encode(array('message' => 'Error updating comment.'));
     }
 }
 
@@ -112,22 +107,35 @@ function deleteComment($id) {
     global $db;
 
     try {
-        // SQL to delete a comment
+        if (!commentExists($id)) {
+            http_response_code(404);
+            echo json_encode(array('message' => 'Comment not found.'));
+            return;
+        }
+
         $sql = "DELETE FROM comments WHERE id=$id";
 
-        // Execute the query
         $result = $db->query($sql);
 
-        // Check if the query was successful
         if ($result) {
             echo json_encode(array('message' => 'Comment deleted successfully.'));
         } else {
-            http_response_code(500); // Internal Server Error
+            http_response_code(500); 
             echo json_encode(array('message' => 'Error deleting comment: ' . $db->error));
         }
     } catch (Exception $e) {
-        http_response_code(500); // Internal Server Error
+        http_response_code(500);
         echo json_encode(array('message' => 'Error: ' . $e->getMessage()));
     }
+}
+
+function commentExists($id) {
+    global $db;
+
+    $sql = "SELECT COUNT(*) FROM comments WHERE id=$id";
+
+    $result = $db->query($sql);
+
+    return $result && $result->fetch_row()[0] > 0;
 }
 ?>

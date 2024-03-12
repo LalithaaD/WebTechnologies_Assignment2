@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "1572e914-2944-4296-9d3f-ac166a8639da",
+		"name": "User API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33511578"
+	},
+	"item": [
+		{
+			"name": "GET User API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get All Users\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an(\"array\").and.not.empty;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/User.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"User.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST User API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create User\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"User created successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user4@example.com\",\r\n    \"password\": \"password123\",\r\n    \"username\": \"NewUser\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/User.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"User.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT User API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update User\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"User updated successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1,\r\n    \"email\": \"updateduser@example.com\",\r\n    \"password\": \"newpassword\",\r\n    \"username\": \"UpdatedUser\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/User.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"User.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE User API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete User\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"User deleted successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/User.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"User.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

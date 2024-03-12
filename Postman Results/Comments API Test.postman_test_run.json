@@ -1,0 +1,146 @@
+{
+	"id": "c10d454b-87ae-473f-aef3-8bac2a3e1da7",
+	"name": "Comments API Test",
+	"timestamp": "2024-03-12T20:08:00.881Z",
+	"collection_id": "33511578-1e2b1a2e-267c-4a09-8630-6779201217bf",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 4,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-03-12T20:08:00.127Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "199087ca-2b1b-4b21-8545-5e88d66db048",
+			"name": "GET Comment API",
+			"url": "http://localhost/WT2/comments.php",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Get All Comments": true
+			},
+			"testPassFailCounts": {
+				"Get All Comments": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Get All Comments": true
+				}
+			]
+		},
+		{
+			"id": "404ecf29-bd93-4867-be6c-ddc76ccf5df6",
+			"name": "POST Comment API",
+			"url": "http://localhost/WT2/comments.php",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Create Comment": true
+			},
+			"testPassFailCounts": {
+				"Create Comment": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Create Comment": true
+				}
+			]
+		},
+		{
+			"id": "902ecbfa-bae5-4587-a2f1-17cceccf82e6",
+			"name": "PUT Comment API",
+			"url": "http://localhost/WT2/comments.php",
+			"time": 21,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Update Comment": true
+			},
+			"testPassFailCounts": {
+				"Update Comment": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				21
+			],
+			"allTests": [
+				{
+					"Update Comment": true
+				}
+			]
+		},
+		{
+			"id": "16894e1b-243d-48b4-ba97-3842140fda64",
+			"name": "DELETE Comment API",
+			"url": "http://localhost/WT2/comments.php",
+			"time": 6,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Delete Comment": true
+			},
+			"testPassFailCounts": {
+				"Delete Comment": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Delete Comment": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 44,
+	"collection": {
+		"requests": [
+			{
+				"id": "199087ca-2b1b-4b21-8545-5e88d66db048",
+				"method": "GET"
+			},
+			{
+				"id": "404ecf29-bd93-4867-be6c-ddc76ccf5df6",
+				"method": "POST"
+			},
+			{
+				"id": "902ecbfa-bae5-4587-a2f1-17cceccf82e6",
+				"method": "PUT"
+			},
+			{
+				"id": "16894e1b-243d-48b4-ba97-3842140fda64",
+				"method": "DELETE"
+			}
+		]
+	}
+}

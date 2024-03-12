@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "ceb7782f-bcc8-4729-bcb6-8aefdc86ae0a",
+		"name": "Orders API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33511578"
+	},
+	"item": [
+		{
+			"name": "GET Order API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get All Orders\", function () {\r",
+							"    const status = pm.response.status;\r",
+							"\r",
+							"    // Log the status for debugging\r",
+							"    console.log(\"Response Status:\", status);\r",
+							"\r",
+							"    // Check if status is either 200 or 'OK'\r",
+							"    pm.expect([200, 'OK'].includes(status), `Expected status to be 200 or 'OK', got ${status}`).to.be.true;\r",
+							"\r",
+							"    if (status === 200 || status === 'OK') {\r",
+							"        pm.response.to.be.json;\r",
+							"\r",
+							"        // Parse JSON response\r",
+							"        const responseBody = pm.response.json();\r",
+							"\r",
+							"        // Log the response body for debugging\r",
+							"        console.log(\"Response Body:\", responseBody);\r",
+							"\r",
+							"        if (Array.isArray(responseBody)) {\r",
+							"            // Iterate through each order in the array\r",
+							"            responseBody.forEach(function (order, index) {\r",
+							"                // Check if the order has 'id' property\r",
+							"                if ('id' in order) {\r",
+							"                    pm.expect(order.id).to.not.equal(null, `Order at index ${index}: Expected 'id' not to be null`);\r",
+							"                } else {\r",
+							"                    pm.expect.fail(`Order at index ${index}: Expected order to have 'id' property`);\r",
+							"                }\r",
+							"\r",
+							"                // Check if the order has 'user_id' property\r",
+							"                pm.expect(order).to.have.property(\"user_id\");\r",
+							"\r",
+							"                // If 'user_id' property exists, check its value\r",
+							"                if ('user_id' in order) {\r",
+							"                    pm.expect(order.user_id).to.not.equal(null, `Order at index ${index}: Expected 'user_id' not to be null`);\r",
+							"                }\r",
+							"\r",
+							"                // Check if the order has 'products' property\r",
+							"                if ('products' in order) {\r",
+							"                    pm.expect(order.products).to.not.equal(null, `Order at index ${index}: Expected 'products' not to be null`);\r",
+							"                } else {\r",
+							"                    pm.expect.fail(`Order at index ${index}: Expected order to have 'products' property`);\r",
+							"                }\r",
+							"            });\r",
+							"        } else if (typeof responseBody === 'object' && 'id' in responseBody) {\r",
+							"            // Handle the case when the response body is a single order object\r",
+							"            // Check if the object has 'user_id', 'id', and 'products' properties\r",
+							"            pm.expect(responseBody).to.have.property(\"user_id\");\r",
+							"            pm.expect(responseBody).to.have.property(\"id\", \"Expected order to have 'id' property\");\r",
+							"            if ('products' in responseBody) {\r",
+							"                pm.expect(responseBody.products).to.not.equal(null, \"Expected 'products' not to be null\");\r",
+							"            } else {\r",
+							"                pm.expect.fail(\"Expected order to have 'products' property\");\r",
+							"            }\r",
+							"        } else {\r",
+							"            pm.expect.fail('Unexpected response body format');\r",
+							"        }\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/orders.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"orders.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Order API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create Order\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"Order created successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 1,\r\n    \"products\": \"Product1,Product2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/orders.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"orders.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Order API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update Order\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"Order updated successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"user_id\": 3,\r\n    \"products\": \"UpdatedProduct1,UpdatedProduct2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/orders.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"orders.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Order API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete Order\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"Order deleted successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/orders.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"orders.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

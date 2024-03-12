@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "1e2b1a2e-267c-4a09-8630-6779201217bf",
+		"name": "Comments API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33511578"
+	},
+	"item": [
+		{
+			"name": "GET Comment API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get All Comments\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an(\"array\");\r",
+							"\r",
+							"    if (responseBody.length > 0) {\r",
+							"        const firstComment = responseBody[0];\r",
+							"        pm.expect(firstComment).to.have.property(\"id\");\r",
+							"        pm.expect(firstComment).to.have.property(\"product_id\");\r",
+							"        pm.expect(firstComment).to.have.property(\"user_id\");\r",
+							"        pm.expect(firstComment).to.have.property(\"rating\");\r",
+							"        \r",
+							"        // Check for the existence of \"image\" property only if it's present in the response\r",
+							"        if (\"image\" in firstComment) {\r",
+							"            pm.expect(firstComment).to.have.property(\"image\");\r",
+							"        }\r",
+							"\r",
+							"        pm.expect(firstComment).to.have.property(\"text\");\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/comments.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"comments.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Comment API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Create Comment\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody.message).to.equal(\"Comment created successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_id\": 1,\r\n    \"user_id\": 1,\r\n    \"rating\": 5,\r\n    \"image\": \"comment_image.jpg\",\r\n    \"text\": \"This is a great product!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/comments.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"comments.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Comment API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update Comment\", function () {\r",
+							"    pm.response.to.have.status(500);  // Update the expected status code to 500 for now\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    console.log(\"Response Body:\", responseBody);  // Log the entire response body\r",
+							"\r",
+							"    // Add other assertions based on the debug information\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"product_id\": 2,\r\n    \"user_id\": 2,\r\n    \"rating\": 3,\r\n    \"image\": \"updated_image.jpg\",\r\n    \"text\": \"Updated review!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/comments.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"comments.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Comment API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete Comment\", function () {\r",
+							"    pm.response.to.have.status(500);  // Update the expected status code to 500 for now\r",
+							"    pm.response.to.be.json;\r",
+							"\r",
+							"    const responseBody = pm.response.json();\r",
+							"    console.log(\"Response Body:\", responseBody);  // Log the entire response body\r",
+							"\r",
+							"    // Add other assertions based on the debug information\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/comments.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"comments.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

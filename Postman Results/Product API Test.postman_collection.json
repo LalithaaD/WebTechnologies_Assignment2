@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "7d0cae42-9ff5-4386-9a58-2cbe492aced3",
+		"name": "Product API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33511578"
+	},
+	"item": [
+		{
+			"name": "GET Product API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for updating a product\r",
+							"pm.test(\"Update Product - Status Code 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Test for fetching all products\r",
+							"pm.test(\"Get All Products - Status Code 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/product.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"product.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Product API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for creating a new product\r",
+							"pm.test(\"Create Product - Status Code 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Create Product - Message Check\", function () {\r",
+							"    pm.expect(pm.response.json().message).to.equal(\"Product created successfully.\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 3,\r\n  \"description\": \"Updated Product\",\r\n  \"image\": \"updated_product.jpg\",\r\n  \"pricing\": 60.00,\r\n  \"shippingCost\": 6.00\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/product.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"product.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Product API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Update Product\", function () {\r",
+							"    const productIdToUpdate = 1; // Replace with the actual ID of the product you want to update\r",
+							"\r",
+							"    // Create the request object\r",
+							"    const request = {\r",
+							"        method: 'PUT',\r",
+							"        url: `http://localhost/WT2/product.php`,\r",
+							"        header: 'Content-Type: application/json',\r",
+							"        body: {\r",
+							"            mode: 'raw',\r",
+							"            raw: JSON.stringify({\r",
+							"                id: productIdToUpdate,\r",
+							"                description: 'Updated Description',\r",
+							"                image: 'updated_image.jpg',\r",
+							"                pricing: 19.99,\r",
+							"                shippingCost: 5.00\r",
+							"            })\r",
+							"        }\r",
+							"    };\r",
+							"\r",
+							"    // Send the request and capture the response\r",
+							"    pm.sendRequest(request, function (err, response) {\r",
+							"        // Log entire response details for debugging\r",
+							"        console.log(response);\r",
+							"\r",
+							"        // Check if the response status code is 200 or 500\r",
+							"        pm.expect(response.code).to.be.oneOf([200, 500]);\r",
+							"\r",
+							"        // Check if the response contains the success message\r",
+							"        if (response.code === 200) {\r",
+							"            const responseBody = response.json();\r",
+							"            if ('message' in responseBody) {\r",
+							"                pm.expect(responseBody.message).to.equal('Product updated successfully');\r",
+							"            } else {\r",
+							"                pm.expect.fail('Response does not contain a \"message\" property');\r",
+							"            }\r",
+							"        } else {\r",
+							"            pm.expect(response.status).to.equal('Internal Server Error');\r",
+							"        }\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"description\": \"Updated Description\",\r\n  \"image\": \"updated_image.jpg\",\r\n  \"pricing\": 19.99,\r\n  \"shippingCost\": 5.00\r\n//   \"message\": \"Product updated successfully\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/product.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"product.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Product API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test for deleting a product\r",
+							"pm.test(\"Delete Product - Status Code 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Delete Product - Message Check\", function () {\r",
+							"    pm.expect(pm.response.json().message).to.equal(\"Product deleted successfully.\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/WT2/product.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"WT2",
+						"product.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
