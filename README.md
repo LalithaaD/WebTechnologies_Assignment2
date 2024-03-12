@@ -1,5 +1,5 @@
 # PHP API Implementation for ReactJS Client
-This repository contains the PHP API implementation required to provide data from a MySQL database instance to the ReactJS client as part of Assignment 1.
+This repository contains the PHP API implementation required to provide data from a MySQL database instance to the ReactJS client.
 
 ## Server Details
 - **Server**: Apache/PHP
